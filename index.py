@@ -2,7 +2,9 @@ import helperInput
 from robots import text
 
 def start():
-    content = {}
+    content = {
+        "maximumSentences": 7
+    }
     content['searchTerm'] = askAndReturnSearchTerm()
     content['prefix'] = askAndReturnPrefix()
 
