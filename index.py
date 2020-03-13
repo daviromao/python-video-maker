@@ -1,25 +1,24 @@
 import helperInput
+from robots import text
 
 def start():
     content = {}
-    content['seachTerm'] = askAndReturnSearchTerm()
+    content['searchTerm'] = askAndReturnSearchTerm()
     content['prefix'] = askAndReturnPrefix()
 
-    print(content)
-
+    text.robot(content)
+    
 def askAndReturnSearchTerm():
     term = input("Type a Wikipedia search term: ")
 
     return term
 
 def askAndReturnPrefix():
-    prefixes = ["Who is", "What is", 'Ther history of']
+    prefixes = ["Who is", "What is", 'The history of']
     selectedPrefixIndex = helperInput.keyInSelect(prefixes)
     selectedPrefixText = prefixes[selectedPrefixIndex]
 
     return selectedPrefixText
-
-
 
 
 

@@ -8,7 +8,7 @@ def keyInSelect(prefixes):
 
     indexOptions = "["
     for i in range(len(prefixes)):
-        indexOptions += str(i)+", "
+        indexOptions += str(i+1)+", "
     indexOptions = str(indexOptions[:-2]+"]")
 
     print("")
