@@ -1,5 +1,3 @@
-import helperInput
-
 def keyInSelect(prefixes):
     print("")
     

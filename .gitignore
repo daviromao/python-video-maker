@@ -131,3 +131,6 @@ dmypy.json
 #credentials
 credentials/algorithmia.json
 credentials/watson-nlu.json
+
+#content
+content/content.json

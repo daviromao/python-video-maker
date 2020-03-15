@@ -7,12 +7,20 @@ from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_watson.natural_language_understanding_v1 import Features, EntitiesOptions, KeywordsOptions
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
-def robot(content):
+from . import state
+
+
+
+def robot():
+    content = state.load()
+
     fetchContentFromWikipedia(content)
     sanitizeContent(content)
     breakContentIntoSentences(content)
     limitMaximumSentences(content)
     fetchKeywordsOfAllSentences(content)
+
+    state.save(content)
 
 def fetchContentFromWikipedia(content):
     algorithmiaApiKey = getAlgorithmiaApiKey()
@@ -60,18 +68,6 @@ def limitMaximumSentences(content):
     maximumSentences = content["maximumSentences"]
     content["sentences"] = content["sentences"][0:maximumSentences]
 
-def getAlgorithmiaApiKey():
-    with open("credentials/algorithmia.json") as f:
-        data = json.load(f)
-    
-    return data['apikey']
-
-def getWatsonData():
-    with open("credentials/watson-nlu.json") as f:
-        data = json.load(f)
-
-    return data
-
 def acessAndReturnNLU():
     data = getWatsonData()
 
@@ -99,5 +95,18 @@ def fetchWatsonAndReturnKeywords(sentence):
 def fetchKeywordsOfAllSentences(content):
     for sentence in content["sentences"]:
         sentence["keywords"] = fetchWatsonAndReturnKeywords(sentence["text"])
+
+
+def getAlgorithmiaApiKey():
+    with open("credentials/algorithmia.json") as f:
+        data = json.load(f)
+    
+    return data['apikey']
+
+def getWatsonData():
+    with open("credentials/watson-nlu.json") as f:
+        data = json.load(f)
+
+    return data
 
 nlu = acessAndReturnNLU()
